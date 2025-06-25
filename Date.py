@@ -1,3 +1,10 @@
+"""
+This module provides date-related utility functions:
+- days_in_month: Returns number of days in a given month
+- is_valid_date: Checks if a date is valid
+- days_between: Calculates days between two dates
+- age_in_days: Calculates age in days from birthdate to today
+"""
 import datetime
 def days_in_month(year,month):
     """
@@ -19,7 +26,17 @@ def days_in_month(year,month):
         else:
             return 28
 def is_valid_date (year,month,day):
-    if year<=datetime.MINYEAR or year>=datetime.MAXYEAR:
+    """
+    Inputs:
+      year  - an integer representing the year
+      month - an integer representing the month
+      day   - an integer representing the day
+      
+    Returns:
+      True if year-month-day is a valid date and
+      False otherwise
+    """
+    if year<datetime.MINYEAR or year>datetime.MAXYEAR:
         return False
     if month<1 or month >12:
         return False
@@ -28,6 +45,20 @@ def is_valid_date (year,month,day):
         return False
     return True
 def days_between (year1,month1,day1,year2,month2,day2):
+    """
+    Inputs:
+      year1  - an integer representing the year of the first date
+      month1 - an integer representing the month of the first date
+      day1   - an integer representing the day of the first date
+      year2  - an integer representing the year of the second date
+      month2 - an integer representing the month of the second date
+      day2   - an integer representing the day of the second date
+      
+    Returns:
+      The number of days from the first date to the second date.
+      Returns 0 if either date is invalid or the second date is 
+      before the first date.
+    """
     if (not is_valid_date(year1,month1,day1)) or (not is_valid_date(year2,month2,day2)):
         return 0
     date1=datetime.date(year1,month1,day1)
@@ -37,6 +68,17 @@ def days_between (year1,month1,day1,year2,month2,day2):
     delta=date2-date1
     return delta.days
 def age_in_days(year,month,day):
+    """
+    Inputs:
+      year  - an integer representing the birthday year
+      month - an integer representing the birthday month
+      day   - an integer representing the birthday day
+      
+    Returns:
+      The age of a person with the input birthday as of today.
+      Returns 0 if the input date is invalid of if the input
+      date is in the future.
+    """
     if not is_valid_date(year,month,day):
         return 0
     today=datetime.date.today()
